@@ -36,25 +36,25 @@
   <script src="src/control.js"></script>
 
   <script>
-    var graph;
-    var file;
-    var edit;
-    var sim;
-    var show;
-    var control;
+  var graph
+var file
+var edit
+var sim
+var show
+var control
 
-    function init() {
-      // Select first tab
-      document.getElementsByClassName('tablinks')[0].click();
+function init() {
+  // Select first tab
+  document.getElementsByClassName('tablinks')[0].click()
 
-      graph = createGraph('graph');
-      file = createFile(graph);
-      edit = createEdit(graph);
-      sim = createSim(graph);
-      show = createShow(graph);
-      control = createControl(graph);
-    }
-  </script>
+  graph = createGraph('graph')
+  file = createFile(graph)
+  edit = createEdit(graph)
+  sim = createSim(graph)
+  show = createShow(graph)
+  control = createControl(graph)
+}
+</script>
 </head>
 <body onload="init()">
   <div id="container">
@@ -312,6 +312,8 @@
             </select>
             <select id="sim_delay" title="Delay between single steps">
               <option value="0">0s</option>
+              <option value="16">16ms</option>
+              <option value="50">50ms</option>
               <option value="250">1/4s</option>
               <option value="500">1/2s</option>
               <option value="1000">1s</option>

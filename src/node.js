@@ -88,7 +88,7 @@ Node.prototype.step = function() {
     this.blink = this.blink - 1
   }
 
-  if (this.distributedClock % 10 === 0) {
+  if (Math.floor(this.distributedClock) % 10 === 0) {
     this.blink = 3
   }
 
@@ -113,12 +113,16 @@ Node.prototype.step = function() {
       if (this.neighbourLatencies[packet.transmitterAddress]) {
         var whatTheClockMightBe = packet.distributedClock + this.neighbourLatencies[packet.transmitterAddress] / 2 // prettier-ignore
 
-        if (whatTheClockMightBe > this.distributedClock) {
+        if (
+          Math.floor(Math.abs(whatTheClockMightBe - this.distributedClock)) > 0
+        ) {
           // add to our latency from the leader
 
-          this.distributedClock = whatTheClockMightBe
+          this.distributedClock = Math.floor(
+            (this.distributedClock + whatTheClockMightBe) / 2
+          )
 
-          this.distanceFromLeader = packet.distanceFromLeader + this.neighbourLatencies[packet.transmitterAddress] / 2 // prettier-ignore
+          this.distanceFromLeader = Math.floor((packet.distanceFromLeader + this.neighbourLatencies[packet.transmitterAddress] / 2) / 2) // prettier-ignore
 
           // broadcast again
           this.shouldBroadcastNum = true

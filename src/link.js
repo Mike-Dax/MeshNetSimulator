@@ -6,7 +6,7 @@ function Link(quality = 100, bandwidth = 50, channel = 0) {
   The quality is 100% minus expected packet loss.
   A wireless link usually has a medium packet loss of 25%. A wired link maybe 2%.
   */
-  this.quality = 25
+  this.quality = 75
   /*
   [0..] Number of packets
   The bandwidth is the number of packets that can be transmitted in one simulation step
@@ -51,7 +51,7 @@ Link.prototype.transmit = function(packet, packetCount) {
 
 // How long will the packet take to traverse the link?
 Link.prototype.getLatency = function(packet, packetCount) {
-  return this.latency
+  return Math.floor(this.latency + Math.random() * 2)
 }
 
 // For changing the implementation during simulation

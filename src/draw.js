@@ -43,6 +43,7 @@ function createDraw() {
   var linkScale = d3.interpolate('#04C714', '#F02311')
   var bandwidthWidthScale = d3.interpolateNumber(1.0, 3.0)
   var bandwidthAlphaScale = d3.interpolateNumber(0.1, 0.8)
+  var qualityScale = d3.interpolateNumber(30, 0)
 
   var NODE_RADIUS = 15
   var LINE_RADIUS = 12
@@ -171,6 +172,7 @@ function createDraw() {
     ctx.strokeStyle = linkScale(d.o.latency / 6)
     ctx.lineWidth = bandwidthWidthScale(d.o.bandwidth / 100)
     ctx.globalAlpha = bandwidthAlphaScale(d.o.bandwidth / 100)
+    ctx.setLineDash([10, qualityScale(d.o.quality / 100)])
 
     ctx.stroke()
     ctx.globalAlpha = 1

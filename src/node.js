@@ -111,14 +111,14 @@ Node.prototype.step = function() {
     // Catch broadcast packets and record neighbor
     if (packet.type === TYPE_CLOCK_SYNC) {
       if (this.neighbourLatencies[packet.transmitterAddress]) {
-        var whatTheClockMightBe = packet.distributedClock + this.neighbourLatencies[packet.transmitterAddress] / 2 // prettier-ignore
+        var whatTheClockMightBe = Math.floor(packet.distributedClock + this.neighbourLatencies[packet.transmitterAddress] / 2) // prettier-ignore
 
         if (whatTheClockMightBe > this.distributedClock) {
           // add to our latency from the leader
 
           this.distributedClock = whatTheClockMightBe
 
-          this.distanceFromLeader = packet.distanceFromLeader + this.neighbourLatencies[packet.transmitterAddress] / 2 // prettier-ignore
+          this.distanceFromLeader = Math.floor(packet.distanceFromLeader + this.neighbourLatencies[packet.transmitterAddress] / 2) // prettier-ignore
 
           // broadcast again
           this.shouldBroadcastNum = true

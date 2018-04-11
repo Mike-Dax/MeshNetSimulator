@@ -6,7 +6,7 @@ function Link(quality = 100, bandwidth = 50, channel = 0) {
   The quality is 100% minus expected packet loss.
   A wireless link usually has a medium packet loss of 25%. A wired link maybe 2%.
   */
-  this.quality = 25
+  this.quality = Math.floor(Math.random() * 25) + 75
   /*
   [0..] Number of packets
   The bandwidth is the number of packets that can be transmitted in one simulation step
